@@ -7,8 +7,8 @@ const transporter = nodemailer.createTransport({
   port: 587,
   secure: false,
   auth: {
-    user: process.env.SENDER_EMAIL,
-    pass: process.env.APP_PASSWORD,
+    user: process.env.NEXT_PUBLIC_SENDER_EMAIL,
+    pass: process.env.NEXT_PUBLIC_APP_PASSWORD,
   },
 });
 
@@ -35,12 +35,6 @@ export async function sendVerificationEmail(
   `;
 
   try {
-    // const { data, error } = await resend.emails.send({
-    //   from: 'Acme <onboarding@resend.dev>',
-    //   to: email,
-    //   subject: 'Mystery Message | Verification Code',
-    //   react: VerificationEmail({ username, otp: verificationCode }),
-    // });
     await transporter.sendMail({
       from: `"AnonNotes" <${process.env.SENDER_EMAIL}>`,
       to: email,
