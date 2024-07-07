@@ -20,7 +20,7 @@ import { useToast } from "@/components/ui/use-toast";
 import { ApiResponse } from "@/types/ApiResponse";
 import Link from "next/link";
 
-const Page = () => {
+const PublicPage = () => {
   const params = useParams();
   const { username } = params;
   const { toast } = useToast();
@@ -174,4 +174,4 @@ const Page = () => {
   );
 };
 
-export default Page;
+export default PublicPage;

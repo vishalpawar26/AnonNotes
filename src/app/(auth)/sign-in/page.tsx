@@ -20,7 +20,7 @@ import { Loader2 } from "lucide-react";
 import { signInSchema } from "@/schema/signInSchema";
 import { signIn } from "next-auth/react";
 
-const page = () => {
+const SigninPage = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const { toast } = useToast();
@@ -130,4 +130,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default SigninPage;
