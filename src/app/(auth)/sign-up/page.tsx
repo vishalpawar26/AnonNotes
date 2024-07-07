@@ -53,8 +53,6 @@ const SignupPage = () => {
             `/api/check-available-username?username=${username}`
           );
           setUsernameMessage(response.data.message);
-          console.log(response);
-          console.log(usernameMessage);
         } catch (error) {
           const axiosError = error as AxiosError<ApiResponse>;
           setUsernameMessage(
@@ -66,7 +64,7 @@ const SignupPage = () => {
       }
     };
     checkForUniqueUsername();
-  }, [username, usernameMessage]);
+  }, [username]);
 
   const onSubmit = async (data: z.infer<typeof signUpSchema>) => {
     setIsSubmitting(true);
