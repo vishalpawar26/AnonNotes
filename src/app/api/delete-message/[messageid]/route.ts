@@ -2,10 +2,14 @@ import { getServerSession } from "next-auth";
 import dbConnect from "@/lib/dbConnect";
 import UserModel from "@/model/User";
 import { User } from "next-auth";
-import { authOptions } from "../auth/[...nextauth]/options";
-import mongoose from "mongoose";
+import { authOptions } from "../../auth/[...nextauth]/options";
 
-export async function GET(request: Request) {
+export async function DELETE(
+  request: Request,
+  { params }: { params: { messageid: string } }
+) {
+  const messageId = params.messageid;
+
   await dbConnect();
 
   const session = await getServerSession(authOptions);
@@ -21,38 +25,35 @@ export async function GET(request: Request) {
     );
   }
 
-  const userId = new mongoose.Types.ObjectId(user._id);
   try {
-    const messages = await UserModel.aggregate([
-      { $match: { _id: userId } },
-      { $unwind: "$messages" },
-      { $sort: { "messages.createdAt": -1 } },
-      { $group: { _id: "$_id", messages: { $push: "$messages" } } },
-    ]);
-    
-    if (!messages || messages.length === 0) {
+    const updatedResult = await UserModel.updateOne(
+      { _id: user._id },
+      { $pull: { messages: { _id: messageId } } }
+    );
+
+    if (updatedResult.modifiedCount === 0) {
       return Response.json(
         {
           success: false,
-          message: "Messages not found",
+          message: "Message not found or already deleted",
         },
-        { status: 401 }
+        { status: 404 }
       );
     }
 
     return Response.json(
       {
         success: true,
-        messages: messages[0].messages,
+        message: "Message deleted",
       },
       { status: 200 }
     );
   } catch (error) {
-    console.log("An unexpected error occured: ", error);
+    console.log("Error in delete-message route:", error);
     return Response.json(
       {
         success: false,
-        message: "Internal server error",
+        message: "Error while deleting the message",
       },
       { status: 500 }
     );

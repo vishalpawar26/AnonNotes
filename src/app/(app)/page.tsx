@@ -26,7 +26,7 @@ const HomePage = () => {
 
   return (
     <>
-      <main className="flex-grow flex flex-col justify-around items-center">
+      <main className="p-4 md:p-8 flex-grow flex flex-col justify-around items-center">
         <div>
           <h1 className="pb-4 text-5xl font-bold text-center">
             Dive into the World of Anonymous Conversations
@@ -46,7 +46,6 @@ const HomePage = () => {
               <CarouselItem key={index}>
                 <div className="p-1">
                   <Card>
-                    <CardHeader>{message.title}</CardHeader>
                     <CardContent className="flex aspect-square items-center justify-center p-6">
                       <span className="text-3xl font-semibold">
                         {message.content}

@@ -9,7 +9,7 @@ export async function middleware(request: NextRequest) {
   const url = request.nextUrl;
 
   // Redirect authenticated users away from auth pages
-  if (token && (url.pathname === "/sign-in" || url.pathname === "/sign-up" || url.pathname === "/verify")) {
+  if (token && (url.pathname === "/" || url.pathname === "/sign-in" || url.pathname === "/sign-up" || url.pathname === "/verify")) {
     return NextResponse.redirect(new URL("/dashboard", request.url));
   }
 
