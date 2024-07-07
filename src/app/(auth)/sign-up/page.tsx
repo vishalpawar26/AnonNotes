@@ -66,7 +66,7 @@ const SignupPage = () => {
       }
     };
     checkForUniqueUsername();
-  }, [username]);
+  }, [username, usernameMessage]);
 
   const onSubmit = async (data: z.infer<typeof signUpSchema>) => {
     setIsSubmitting(true);

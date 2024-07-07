@@ -20,6 +20,7 @@ const DashboardPage = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [isSwitchLoading, setIsSwitchLoading] = useState(false);
   const [isTextCopied, setIsTextCopied] = useState(false);
+  const [profileUrl, setProfileUrl] = useState("");
 
   const { toast } = useToast();
   const { data: session } = useSession();
@@ -83,6 +84,14 @@ const DashboardPage = () => {
     if (!session || !session.user) {
       return;
     }
+
+    // Update profile URL only on the client side
+    if (typeof window !== "undefined") {
+      const username = session?.user?.username || "AnonNotesUser";
+      const baseUrl = `${window.location.protocol}//${window.location.host}`;
+      setProfileUrl(`${baseUrl}/u/${username}`);
+    }
+
     fetchMessages();
     fetchAcceptMessages();
   }, [session, fetchMessages, fetchAcceptMessages]);
@@ -112,10 +121,6 @@ const DashboardPage = () => {
       setIsSwitchLoading(false);
     }
   };
-
-  const username = session?.user?.username || "AnonNotesUser";
-  const baseUrl = `${window.location.protocol}//${window.location.host}`;
-  const profileUrl = `${baseUrl}/u/${username}`;
 
   const copyToClipboard = () => {
     setIsTextCopied(true);
