@@ -36,7 +36,7 @@ export async function GET(request: Request) {
           success: false,
           message: "Messages not found",
         },
-        { status: 401 }
+        { status: 404 }
       );
     }
 

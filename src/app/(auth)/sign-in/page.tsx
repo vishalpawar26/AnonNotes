@@ -43,8 +43,6 @@ const SigninPage = () => {
       password: data.password,
     });
 
-    console.log(result);
-
     if (result?.error) {
       setIsSubmitting(false);
       if (result.error == "CredentialsSignin") {
@@ -64,10 +62,8 @@ const SigninPage = () => {
     }
 
     if (result?.url) {
-      console.log(result.url);
       setIsSubmitting(false);
       router.replace("/dashboard");
-      console.log("Signin successful");
     }
   };
 
