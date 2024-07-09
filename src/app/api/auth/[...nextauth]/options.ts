@@ -26,11 +26,11 @@ export const authOptions: NextAuthOptions = {
           });
 
           if (!user) {
-            throw new Error("User not found!");
+            throw new Error("User not found");
           }
 
           if (!user.isVerified) {
-            throw new Error("Please verify your email before login!");
+            throw new Error("Please verify your email before loggin in");
           }
 
           const isCorrectPassword = await bcrypt.compare(
@@ -40,7 +40,7 @@ export const authOptions: NextAuthOptions = {
           if (isCorrectPassword) {
             return user;
           } else {
-            throw new Error("Incorrect username or password!");
+            throw new Error("Incorrect username or password");
           }
         } catch (err: any) {
           throw new Error(err);
@@ -57,6 +57,7 @@ export const authOptions: NextAuthOptions = {
         token.isAcceptingMessages = user.isAcceptingMessages;
         token.username = user.username;
       }
+      console.log("Tokennnnnnnnnnn", token);
       return token;
     },
     async session({ session, token }) {
@@ -79,5 +80,5 @@ export const authOptions: NextAuthOptions = {
     strategy: "jwt",
   },
 
-  secret: process.env.NEXT_PUBLIC_NEXTAUTH_SECRET,
+  secret: process.env.NEXTAUTH_SECRET,
 };

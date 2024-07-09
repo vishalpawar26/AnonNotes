@@ -7,8 +7,8 @@ const transporter = nodemailer.createTransport({
   port: 587,
   secure: false,
   auth: {
-    user: process.env.NEXT_PUBLIC_SENDER_EMAIL,
-    pass: process.env.NEXT_PUBLIC_APP_PASSWORD,
+    user: process.env.SENDER_EMAIL,
+    pass: process.env.APP_PASSWORD,
   },
 });
 
@@ -17,21 +17,28 @@ export async function sendVerificationEmail(
   username: string,
   verificationCode: string
 ): Promise<ApiResponse> {
+  // const htmlCode: string = `
+  // <!DOCTYPE html>
+  // <html>
+  // <head>
+  // <title>Verification Code</title>
+  // </head>
+  // <body>
+
+  // <h2>Hello ${username},</h2>
+  // <p>Thank you for registering. Please use the following verification code to complete your registration:</p>
+  // <h3>${verificationCode}</h3>
+  // <p>If you did not request this code, please ignore this email.</p>
+
+  // </body>
+  // </html>
+  // `;
+
   const htmlCode: string = `
-  <!DOCTYPE html>
-  <html>
-  <head>
-  <title>Verification Code</title>
-  </head>
-  <body>
-
-  <h2>Hello ${username},</h2>
-  <p>Thank you for registering. Please use the following verification code to complete your registration:</p>
-  <h3>${verificationCode}</h3>
-  <p>If you did not request this code, please ignore this email.</p>
-
-  </body>
-  </html>
+    <h2>Hello ${username},</h2>
+    <p>Thank you for registering. Please use the following verification code to complete your registration:</p>
+    <h3>${verificationCode}</h3>
+    <p>If you did not request this code, please ignore this email.</p>  
   `;
 
   try {

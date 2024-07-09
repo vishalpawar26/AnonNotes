@@ -44,6 +44,7 @@ const SigninPage = () => {
     });
 
     console.log(result);
+
     if (result?.error) {
       setIsSubmitting(false);
       if (result.error == "CredentialsSignin") {
@@ -62,10 +63,11 @@ const SigninPage = () => {
       return;
     }
 
-    console.log(result);
     if (result?.url) {
+      console.log(result.url);
       setIsSubmitting(false);
       router.replace("/dashboard");
+      console.log("Signin successful");
     }
   };
 
@@ -74,7 +76,7 @@ const SigninPage = () => {
       <div className="w-full max-w-md p-8 space-y-8 bg-white rounded-lg shadow-md">
         <div className="text-center">
           <h1 className="text-4-xl font-extrabold tracking-tight lg:text-5xl mb-6">
-            Join Mystery Message
+            Join AnonNotes
           </h1>
           <p className="mb-4">Sign in to start your anonymous adventure</p>
         </div>
