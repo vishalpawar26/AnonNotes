@@ -53,10 +53,6 @@ This will start the development server at http://localhost:3000 by default.
 2. Create an account or sign in.
 3. Users can then view any anonymous messages they have received.
 
-### Contributing
-
-We welcome contributions! Please see the CONTRIBUTING.md file for details.
-
 ### License
 
 This project is licensed under the MIT License. See the LICENSE file for details.
